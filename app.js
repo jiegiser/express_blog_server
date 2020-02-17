@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: jiegiser
  * @Date: 2020-01-29 19:14:44
- * @LastEditors  : jiegiser
+ * @LastEditors: jiegiser
  * @LastEditTime : 2020-02-12 11:53:49
  */
 // 处理路由请求出错
@@ -29,6 +29,8 @@ var app = express();
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'jade');
 const ENV = process.env.NODE_ENV
+
+// https://github.com/expressjs/morgan 查看打印日志的格式
 if(ENV != 'production') {
   // 对日志进行配置
   app.use(logger('dev', {
@@ -36,7 +38,7 @@ if(ENV != 'production') {
     stream: process.stdout
   }));
 } else {
-  // 线上环境使用，打印的日志比较详细
+  // 线上环境使用，打印的日志比较详细--将日志写到access.log文件当中
   const logFileName = path.join(__dirname, 'logs', 'access.log')
   const writeStream = fs.createWriteStream(logFileName, {
     flags: 'a'
